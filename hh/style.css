@@ -93,7 +93,7 @@ section.container > form.flip {
   section.container > form.flip > .front, section.container > form.flip > .back {
     position: absolute;
     width: 100%;
-    height: 100%;
+    height: 60%;
 	backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden; }
@@ -243,7 +243,7 @@ section.container > form.flip > .front {
   box-shadow: inset 0 0 10px 1px rgba(255, 255, 255, 0.6), 0 -2px 4px -3px rgba(0, 0, 0, 0.75), 0 2px 3px -2px rgba(0, 0, 0, 0.6); }
 
 #letter {
-  background: #fafafa;
+  background: #000;
   width: 90%;
   height: 95%;
   position: absolute;
