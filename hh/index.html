@@ -279,12 +279,16 @@
                 case 0:
                     break;
                 case 1:
-                    $(all[index]).css('transform','translateY(-100%)');
-                    $(all[index]).removeClass('active')
                     next=index+1;
-                    if(next>all.length){
+                    if(next>=all.length){
                         next=index;
                     }
+                    if(next==index){
+                        return;
+                    }
+                    $(all[index]).css('transform','translateY(-100%)');
+                    $(all[index]).removeClass('active')
+                    console.log(next)
                     $(all[next]).addClass('active')
                     if($('.part2.active').length){
                         $('.part2').css({
@@ -303,12 +307,15 @@
                     }
                     break;
                 case 2:
-                    $(all[index]).removeClass('active')
-                    $(all[index]).css('opacity','0');
                     next1=index-1;
                     if(next<0){
                         next1=index;
                     }
+                    if(index==0){
+                        return;
+                    }
+                    $(all[index]).removeClass('active')
+                    $(all[index]).css('opacity','0');
                     $(all[next1]).css('transform','translateY(0)');
                     $(all[next1]).addClass('active')
                     if($('.part2.active').length){
