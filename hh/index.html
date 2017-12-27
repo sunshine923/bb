@@ -9,13 +9,15 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <style>
-    body,
-    html {
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    html,body{
         width: 100%;
         height:100%;
-        padding: 0;
-        margin: 0;
         overflow: hidden;
+        position: fixed;
     }
 
     #container {
@@ -41,6 +43,10 @@
         opacity: 0;
         transition: all 0.3s;
     }
+    .part3{
+        opacity: 0;
+        position: absolute;
+    }
     .flip{
         width: 100%;
         height:100%;
@@ -52,7 +58,7 @@
         text-align: center;
         margin: 30px 0;
     }
-    .flip .flip p:nth-child(2) {
+    .flip p:nth-child(2) {
         font-size: 20px;
         margin: 40px 0 20px;
         padding: 0 20px;
@@ -61,7 +67,7 @@
     .flip p:nth-child(3) {
         font-size: 17px;
         margin: 20px 0 20px;
-        padding: 0 20px;
+        padding: 0 30px;
     }
     .flip span{
         margin-top: 20px;
@@ -139,6 +145,13 @@
         left: 0;
         transition: all 0.4s;
     }
+    div[class*=img]{
+        width: 14rem;
+        height: auto;
+        opacity: 0;
+        position: absolute;
+        z-index: 9999;
+    }
 </style>
 
 <body>
@@ -149,7 +162,7 @@
     <main class="part2">
         <div class="flip">
             <h2><span>邀</span><span>请</span><span>函</span></h2>
-            <p>
+            <p class="name">
                 <span>李</span>
                 <span>慧</span>
                 <span>老</span>
@@ -167,6 +180,32 @@
             </p>
         </div>
     </main>
+    <main class="part3">
+        <div class="img1">
+            <img src="1.png" alt="">
+        </div>
+        <div class="img2">
+            <img src="2.png" alt="">
+        </div>
+        <div class="img3">
+            <img src="3.png" alt="">
+        </div>
+        <div class="img4">
+            <img src="4.png" alt="">
+        </div>
+        <div class="img5">
+            <img src="5.png" alt="">
+        </div>
+        <div class="img6">
+            <img src="6.png" alt="">
+        </div>
+        <div class="img7">
+            <img src="7.png" alt="">
+        </div>
+        <div class="img8">
+            <img src="8.png" alt="">
+        </div>
+    </main>
     <div class="next">
         <img src="qq.png" alt="">
     </div>
@@ -181,6 +220,7 @@
     $(function () {
         $('#canvas').css({ opacity: '1',transform:'scale(1)'})
         var span = $('.flip span')
+        var img = $('.part3>div');
         particlesJS('canvas', {
             particles: {
                 color: '#fff',
@@ -207,7 +247,7 @@
                 }
             },
             interactivity: {
-                enable: true,
+                enable: false,
                 mouse: {
                     distance: 300
                 },
@@ -218,7 +258,7 @@
                 },
                 events: {
                     onclick: {
-                        enable: true,
+                        enable: false,
                         mode: 'push', // "push" or "remove"
                         nb: 4
                     }
@@ -288,7 +328,6 @@
                     }
                     $(all[index]).css('transform','translateY(-100%)');
                     $(all[index]).removeClass('active')
-                    console.log(next)
                     $(all[next]).addClass('active')
                     if($('.part2.active').length){
                         $('.part2').css({
@@ -305,6 +344,34 @@
                             $(span[i]).animate({opacity:'0'})
                         }
                     }
+                    var flag;
+                    if($('.part3.active').length){
+                        $('.part3').css({
+                            'opacity':"1"
+                        })
+                        flag = true;
+                        for(var i =0;i<img.length+1;i++){
+                            console.log(1)
+                            var rights = -Math.random()*10
+                            var tops = -Math.random()
+                            var rights1 = Math.random()*100
+                            $(img[i]).css({top:tops+'rem',right:rights+'%'}).delay(3000*i).animate({opacity:1},2000).animate({right:rights1+"%",top:'100%'},4000).queue(function () {
+                                $(this).addClass('test').css({opacity:0})
+                                if($('.img8.test').length){
+                                    $(this).css({width:'18rem',height:'18rem',top:0,left:0,right:0,bottom:0,margin:'auto',opacity:1,transition:'all 0.5s'})
+                                }
+                            })
+                        }
+                    }else{
+                        $('.part3').css({
+                            'opacity':"0"
+                        })
+                        flag=false;
+                        for(var i =0;i<img.length+1;i++){
+                            $(img[i]).finish().css({opacity:0}).removeClass('test')
+                        }
+                    }
+
                     break;
                 case 2:
                     next1=index-1;
@@ -331,6 +398,31 @@
                         })
                         for(var i=0;i<span.length;i++){
                             $(span[i]).animate({opacity:'0'})
+                        }
+                    }
+                    if($('.part3.active').length){
+                        $('.part3').css({
+                            'opacity':"1"
+                        })
+                        flag=true;
+                        for(var i =0;i<img.length+1;i++){
+                            var rights = -Math.random()*10
+                            var tops = -Math.random()
+                            var rights1 = Math.random()*100
+                            $(img[i]).css({top:tops+'rem',right:rights+'%'}).delay(3000*i).animate({opacity:1},2000).animate({right:rights1+"%",top:'100%'},4000).queue(function () {
+                                $(this).addClass('test').css({opacity:0})
+                                if($('.img8.test').length){
+                                    $(this).css({width:'18rem',height:'18rem',top:0,left:0,right:0,bottom:0,margin:'auto',opacity:1,transition:'all 0.5s'})
+                                }
+                            })
+                        }
+                    }else{
+                        $('.part3').css({
+                            'opacity':"0"
+                        })
+                        flag=false;
+                        for(var i =0;i<img.length+1;i++){
+                            $(img[i]).finish().css({opacity:0}).removeClass('test')
                         }
                     }
                     break;
